@@ -1,4 +1,5 @@
 let numRows = document.getElementById('grid-size');
+let header = document.querySelector('h1');
 
 let mouseDown = false;
 window.onmousedown = () => {
@@ -79,27 +80,37 @@ let clear = document.querySelector('#clear');
 colorMode.style.backgroundColor = 'lightBlue';
 
 colorMode.addEventListener('click', (e) => {
-    e.target.style.backgroundColor = 'lightBlue'
-    rainbowMode.style.backgroundColor = '#ededed'
-    eraser.style.backgroundColor = '#ededed'
-    color = 'black'
+    e.target.style.backgroundColor = 'lightBlue';
+    rainbowMode.style.backgroundColor = '#ededed';
+    eraser.style.backgroundColor = '#ededed';
+    header.innerHTML = `<span style = "color: black">Etch-a-Sketch</span>`
+    color = 'black';
 })
 rainbowMode.addEventListener('click', (e) => {
-    e.target.style.backgroundColor = 'lightBlue'
-    colorMode.style.backgroundColor = '#ededed'
-    eraser.style.backgroundColor = '#ededed'
-    bigContainer.focus()
-    color = 'random'
+    e.target.style.backgroundColor = 'lightBlue';
+    colorMode.style.backgroundColor = '#ededed';
+    eraser.style.backgroundColor = '#ededed';
+    rainbowHeader();
+    color = 'random';
 })
 eraser.addEventListener('click', (e) => {
-    e.target.style.backgroundColor = 'lightBlue'
-    colorMode.style.backgroundColor = '#ededed'
-    rainbowMode.style.backgroundColor = '#ededed'
-    bigContainer.focus()
-    color = 'white'
+    e.target.style.backgroundColor = 'lightBlue';
+    colorMode.style.backgroundColor = '#ededed';
+    rainbowMode.style.backgroundColor = '#ededed';
+    header.innerHTML = `<span style = "color: indianRed">Etch-a-Sketch</span>`
+    color = 'white';
 })
 clear.addEventListener('click', (e) => {
-    document.querySelectorAll('.square').forEach(sq => sq.style.backgroundColor = 'white')
-    bigContainer.focus()
+    document.querySelectorAll('.square').forEach(sq => sq.style.backgroundColor = 'white');
 })
 
+function rainbowHeader (){
+    let result = '';
+    let headerLength = header.textContent.length;
+    for (let i=0; i < headerLength; i++) {
+        let letterColor = randomColor();
+        let letter = header.textContent[i];
+        result += `<span style = "color: ${letterColor}">${letter}</span>`;
+    }
+    header.innerHTML = result;
+}
