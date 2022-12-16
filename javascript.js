@@ -51,16 +51,21 @@ function randomColor() {
         return result;
 }
 
-let color = 'black';
+let color = '#999999';
 
 function initializeQuery() {
     const square = document.querySelectorAll('.square');
     square.forEach(sq => sq.addEventListener('mousedown', (e) => {
         if (color == 'random')
             e.target.style.backgroundColor = randomColor();
-        else
-            e.target.style.backgroundColor = color;
+        else if (e.target.style.backgroundColor == '' || e.target.style.backgroundColor == 'white' || eraser.style.backgroundColor == 'lightblue')
+                e.target.style.backgroundColor = color;
+        else {
+            let newColorNum = e.target.style.backgroundColor.split(',')[1] - 25
+            e.target.style.backgroundColor = `rgb(${newColorNum},${newColorNum},${newColorNum}`;
+        }
     }));
+
     square.forEach(sq => sq.addEventListener('mouseenter', animate));
 }
 
@@ -68,8 +73,12 @@ function animate (e) {
     if (mouseDown)
         if (color == 'random')
             this.style.backgroundColor = randomColor();
-        else
-            this.style.backgroundColor = color;
+        else if (e.target.style.backgroundColor == '' || e.target.style.backgroundColor == 'white' || eraser.style.backgroundColor == 'lightblue')
+            e.target.style.backgroundColor = color;
+        else {
+            let newColorNum = e.target.style.backgroundColor.split(',')[1] - 25
+            e.target.style.backgroundColor = `rgb(${newColorNum},${newColorNum},${newColorNum}`;
+        }
 
 }
 
@@ -84,7 +93,7 @@ colorMode.addEventListener('click', (e) => {
     rainbowMode.style.backgroundColor = '#ededed';
     eraser.style.backgroundColor = '#ededed';
     header.innerHTML = `<span style = "color: black">Etch-a-Sketch</span>`
-    color = 'black';
+    color = '#999999';
 })
 rainbowMode.addEventListener('click', (e) => {
     e.target.style.backgroundColor = 'lightBlue';
