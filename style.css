@@ -9,9 +9,8 @@ h1 {
 }
 
 .big-container {
-    width: 1000px;
+    width: 70%;
     margin: auto;
-    justify-content: center;
     background-color: white;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
@@ -33,6 +32,7 @@ h1 {
 #info {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 20%;
     margin-left: 2rem;
 }
@@ -52,7 +52,8 @@ button {
     padding: 0.5rm 1.5rem;
     margin-bottom: 1rem;
     cursor: pointer;
-    box-sizing: border-box;
+    box-sizing: content-box;
+    width: 200px;
     height: 2rem;
     white-space: nowrap;
 }
