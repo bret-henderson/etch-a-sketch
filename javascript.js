@@ -2,13 +2,8 @@ let numRows = document.getElementById('grid-size');
 let header = document.querySelector('h1');
 
 let mouseDown = false;
-window.onmousedown = () => {
-    console.log('mouse down')
-  mouseDown = true
-}
-window.onmouseup = () => {
-  mouseDown = false;
-}
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
 const bigContainer = document.querySelector('.big-container');
 
@@ -34,6 +29,7 @@ numRows.addEventListener('change', () => {
         document.querySelector('#error').textContent = 'Error: max value of 100'
         return;
     }
+
     document.querySelector('#error').textContent = ''
     document.querySelectorAll('.square').forEach(sq => sq.remove())
     document.querySelectorAll('.row').forEach(row => row.remove())
@@ -56,6 +52,7 @@ let color = '#999999';
 function initializeQuery() {
     const square = document.querySelectorAll('.square');
     square.forEach(sq => sq.addEventListener('mousedown', (e) => {
+        e.preventDefault()
         if (color == 'random')
             e.target.style.backgroundColor = randomColor();
         else if (e.target.style.backgroundColor == '' || e.target.style.backgroundColor == 'white' || eraser.style.backgroundColor == 'lightblue')
@@ -70,16 +67,16 @@ function initializeQuery() {
 }
 
 function animate (e) {
+    e.preventDefault()
     if (mouseDown)
-        if (color == 'random')
-            this.style.backgroundColor = randomColor();
-        else if (e.target.style.backgroundColor == '' || e.target.style.backgroundColor == 'white' || eraser.style.backgroundColor == 'lightblue')
-            e.target.style.backgroundColor = color;
-        else {
-            let newColorNum = e.target.style.backgroundColor.split(',')[1] - 25
-            e.target.style.backgroundColor = `rgb(${newColorNum},${newColorNum},${newColorNum}`;
-        }
-
+            if (color == 'random')
+                this.style.backgroundColor = randomColor();
+            else if (e.target.style.backgroundColor == '' || e.target.style.backgroundColor == 'white' || eraser.style.backgroundColor == 'lightblue')
+                e.target.style.backgroundColor = color;
+            else {
+                let newColorNum = e.target.style.backgroundColor.split(',')[1] - 25
+                e.target.style.backgroundColor = `rgb(${newColorNum},${newColorNum},${newColorNum}`;
+            }
 }
 
 let colorMode = document.querySelector('#color-mode')
