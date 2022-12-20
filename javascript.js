@@ -2,8 +2,8 @@ let numRows = document.getElementById('grid-size');
 let header = document.querySelector('h1');
 
 let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
-document.body.onmouseup = () => (mouseDown = false);
+document.body.onmousedown = () => { mouseDown = true };
+document.body.onmouseup = () => { mouseDown = false };
 
 const bigContainer = document.querySelector('.big-container');
 
@@ -24,12 +24,11 @@ function createGrid (numRows) {
 createGrid(numRows.value)
 initializeQuery()
 
-numRows.addEventListener('change', () => {
+numRows.addEventListener('change', (e) => {
     if (numRows.value > 100) {
         document.querySelector('#error').textContent = 'Error: max value of 100'
         return;
     }
-
     document.querySelector('#error').textContent = ''
     document.querySelectorAll('.square').forEach(sq => sq.remove())
     document.querySelectorAll('.row').forEach(row => row.remove())
